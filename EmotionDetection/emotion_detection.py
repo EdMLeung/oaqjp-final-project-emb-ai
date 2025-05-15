@@ -4,7 +4,18 @@ import requests, json # Import the requests library to handle HTTP requests
 def emotion_detector(text_to_analyse):  
     # URL of the sentiment analysis service
     url = 'https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
-    
+
+    # Return error code 400 if input text_to_analyse is empty
+    if not text_to_analyse:
+        return {
+            'anger': None,
+            'disgust': None,
+            'fear': None,
+            'joy': None,
+            'sadness': None,
+            'dominant_emotion': None
+        }, 400
+
     # Create a dictionary with the text to be analyzed
     myobj = { "raw_document": { "text": text_to_analyse } }
     
@@ -25,4 +36,4 @@ def emotion_detector(text_to_analyse):
 
     # Return the response text from the API
     return {'anger': emotions ["anger"],'disgust': emotions ["disgust"],'fear': emotions ["fear"],
-    'joy': emotions ["joy"],'sadness': emotions ["sadness"],'dominant_emotion': dominant_emotion}
+    'joy': emotions ["joy"],'sadness': emotions ["sadness"],'dominant_emotion': dominant_emotion}, 200
