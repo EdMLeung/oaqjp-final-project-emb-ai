@@ -1,5 +1,6 @@
-"""server.py - Flask server for the Emotion Detector web application. 
-   Updated after Pylint code analysis
+"""
+   server.py - Flask server for the Emotion Detector web application. 
+             - Updated after Pylint code analysis
 """
 # Import Flask, render_template, request from the flask pramework package
 from flask import Flask, render_template, request
@@ -13,9 +14,9 @@ def emotion_detector_function():
     ''' This function calls the application
     '''
     text_to_analyze = request.args.get('textToAnalyze')
-    response, status_code = emotion_detector(text_to_analyze)
+    response = emotion_detector(text_to_analyze)
 
-    if response['dominant_emotion'] is None or status_code == 400:
+    if response['dominant_emotion'] is None:
         response_text = "Invalid text! Please try again!"
     else:
         response_text = f"For the given statement, the system response is 'anger': \
